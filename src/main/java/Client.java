@@ -25,8 +25,16 @@ public class Client {
     return name;
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public String getPhoneNumber() {
     return phone_number;
+  }
+
+  public void setPhoneNumber(String phone_number) {
+    this.phone_number = phone_number;
   }
 
   public LocalDateTime getClientSince() {
@@ -35,6 +43,10 @@ public class Client {
 
   public int getStylistId() {
     return stylist_id;
+  }
+
+  public void setStylistId(int stylist_id) {
+    this.stylist_id = stylist_id;
   }
 
   public void save() {
@@ -80,5 +92,24 @@ public class Client {
     }
   }
 
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM clients WHERE id=:id";
+      con.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
 
+  public void update() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET name=:name, phone_number=:phone_number, stylist_id=:stylist_id WHERE id=:id";
+      con.createQuery(sql)
+      .addParameter("name", this.name)
+      .addParameter("phone_number", this.phone_number)
+      .addParameter("stylist_id", this.stylist_id)
+      .addParameter("id", this.id)
+      .executeUpdate();
+    }
+  }
 }
