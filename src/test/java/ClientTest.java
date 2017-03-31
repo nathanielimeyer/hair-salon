@@ -19,39 +19,47 @@ public class ClientTest {
 
   @Test
   public void Client_instantiatesCorrectly_true() {
-    Client myClient = new Client("Lila", "415-555-1212");
+    Client myClient = new Client("Lila", "415-555-1212", 3);
     assertTrue(myClient instanceof Client);
   }
 
   @Test
   public void getId_clientsInstantiateWithAnId_true() {
-    Client myClient = new Client("Lila", "415-555-1212");
+    Client myClient = new Client("Lila", "415-555-1212", 3);
     myClient.save();
+    Client savedClient = Client.all().get(0);
     assertTrue(myClient.getId() > 0);
+    assertEquals(myClient.getId(), savedClient.getId());
   }
 
   @Test
   public void getName_returnsName_Lila() {
-    Client myClient = new Client("Lila", "415-555-1212");
+    Client myClient = new Client("Lila", "415-555-1212", 3);
     assertEquals("Lila", myClient.getName());
   }
 
   @Test
   public void getPhoneNumber_returnsPhoneNumber_4155551212() {
-    Client myClient = new Client("Lila", "415-555-1212");
+    Client myClient = new Client("Lila", "415-555-1212", 3);
     assertEquals("415-555-1212", myClient.getPhoneNumber());
   }
 
   @Test
   public void getClientSince_returnsDate_today() {
-    Client myClient = new Client("Lila", "415-555-1212");
+    Client myClient = new Client("Lila", "415-555-1212", 3);
     assertEquals(LocalDateTime.now().getDayOfWeek(), myClient.getClientSince().getDayOfWeek());
   }
 
+  @Test
+  public void getStylistId_returnsStylistId_3() {
+    Client myClient = new Client("Lila", "415-555-1212", 3);
+    assertEquals(3, myClient.getStylistId());
+  }
+
   @Test public void all_returnsAllInstancesOfClient_true() {
-    Client firstClient = new Client("Lila", "415-555-1212");
+    Client firstClient = new Client("Lila", "415-555-1212", 3);
     firstClient.save();
-    Client secondClient = new Client("Ilana", "415-555-1313");
+    Client secondClient = new Client("Ilana", "415-555-1313", 4);
     secondClient.save();
     assertTrue(Client.all().get(0).equals(firstClient));
     assertTrue(Client.all().get(1).equals(secondClient));
@@ -64,9 +72,9 @@ public class ClientTest {
 
   @Test
   public void findById_returnsClientWithSameId_secondClient() {
-  Client firstClient = new Client("Lila", "415-555-1212");
+  Client firstClient = new Client("Lila", "415-555-1212", 3);
   firstClient.save();
-  Client secondClient = new Client("Ilana", "415-555-1313");
+  Client secondClient = new Client("Ilana", "415-555-1313", 4);
   secondClient.save();
   assertEquals(Client.findById(secondClient.getId()), secondClient);
   }
