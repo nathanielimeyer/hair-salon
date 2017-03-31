@@ -1,0 +1,17 @@
+<h1>Stylist: $stylist.getName()</h1>
+<p>Phone number: $stylist.getPhoneNumber()</p>
+<p>Works weekdays? $stylist.worksWeekdays()</p>
+<p>Works weeknights? $stylist.worksWeeknights()</p>
+<p>Works weekends? $stylist.worksWeekends()</p>
+
+<h3>Clients:</h3>
+#if($clients)
+  <p>Click on a client's name to see their details:</p>
+  <ul>
+    #foreach ($client in $clients)
+      <li><a href="/clients/$client.getId()">$client.getName()</a></li>
+    #end
+  </ul>
+#else
+  <p>$stylist.getName() doesn't have any clients yet.</p>
+#end

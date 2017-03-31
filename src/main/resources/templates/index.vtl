@@ -1,0 +1,72 @@
+<!--index.vtl-->
+<h1>Welcome to Hair Salon</h1>
+
+#if($stylists)
+  <p>Click on a stylist's name to see their details:</p>
+  <ul>
+    #foreach ($stylist in $stylists)
+      <li><a href="/stylists/$stylist.getId()">$stylist.getName()</a></li>
+    #end
+  </ul>
+#else
+  <p>There are no stylists yet!</p>
+#end
+
+<br>
+
+#if($unassignedClients)
+  <p>These clients have no stylist!</p>
+  <ul>
+    #foreach ($unassignedClient in $unassignedClients)
+      <li><a href="/clients/$unassignedClient.getId()">$unassignedClient.getName()</a></li>
+    #end
+  </ul>
+#else
+  <p>Hooray! All clients have stylists!</p>
+#end
+  <!-- <h2>New Animal:</h2>
+
+  <form action="/animals" method="post">
+    <div class="form-group">
+        <label for="name">Animal Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="gender">Gender</label>
+        <input type="text" name="gender" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="type">Animal Type</label>
+        <input type="text" name="type" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="breed">Animal Breed</label>
+        <input type="text" name="breed" class="form-control" required>
+    </div>
+    <button type="submit" name="button" class="btn btn-warning">Submit new animal</button>
+  </form>
+
+  <h2>New Customer:</h2>
+
+  <form action="/customers" method="post">
+    <div class="form-group">
+        <label for="name">Customer Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="phone_number">Phone Number</label>
+        <input type="text" name="phone_number" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="type">Preferred Animal Type</label>
+        <input type="text" name="type" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="breed">Preferred Animal Breed</label>
+        <input type="text" name="breed" class="form-control" required>
+    </div>
+    <button type="submit" name="button" class="btn btn-warning">Submit new customer</button>
+  </form> -->
+
+
+<!--index.vtl-->

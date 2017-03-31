@@ -27,8 +27,8 @@ public class StylistTest {
   public void Stylist_instantiatesWithAnId_true() {
     Stylist myStylist = new Stylist("Kelsi", "415-555-1313", true, true, false);
     myStylist.save();
-    Stylist savedStylist = Stylist.all().get(1);
-    assertTrue(myStylist.getId() > 1);
+    Stylist savedStylist = Stylist.all().get(0);
+    assertTrue(myStylist.getId() > 0);
     assertEquals(myStylist.getId(), savedStylist.getId());
   }
 
@@ -68,13 +68,13 @@ public class StylistTest {
     firstStylist.save();
     Stylist secondStylist = new Stylist("Mysti", "415-555-4444", false, false, true);
     secondStylist.save();
-    assertTrue(Stylist.all().get(1).equals(firstStylist));
-    assertTrue(Stylist.all().get(2).equals(secondStylist));
+    assertTrue(Stylist.all().get(0).equals(firstStylist));
+    assertTrue(Stylist.all().get(1).equals(secondStylist));
   }
 
   @Test
   public void clear_emptiesAllStylistsFromArrayList_0() {
-    assertEquals(1, Stylist.all().size());
+    assertEquals(0, Stylist.all().size());
   }
 
   @Test

@@ -11,7 +11,6 @@ public class Stylist {
   private boolean weekdays;
   private boolean weekends;
 
-
   public Stylist(String name, String phone_number, boolean weeknights, boolean weekdays, boolean weekends) {
     this.name = name;
     this.phone_number = phone_number;
@@ -79,7 +78,7 @@ public class Stylist {
   }
 
   public static List<Stylist> all() {
-    String sql = "SELECT * FROM stylists";
+    String sql = "SELECT * FROM stylists WHERE id <> 1";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Stylist.class);
     }
