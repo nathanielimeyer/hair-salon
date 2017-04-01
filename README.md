@@ -24,13 +24,17 @@ _User Stories_
 ## Setup/Installation Requirements
 
 * _In any folder with git installed, run "git clone https://github.com/nathanielimeyer/hair-salon.git"._
+* _Load hair_salon.sql into your database._
 * _type "cd ./hair-salon" and enter_
 * _type "gradle run" and enter_
 * _In a browser load localhost:4567_
 
 ## Known Bugs
 
-
+No updates have been implemented through the UI.
+No deletes have been implemented through the UI.
+Haven't determined how to take boolean queryParams.
+Haven't implemented add client from the stylist page, but can do it with a dropdown on the home page.
 
 ## Support and contact details
 
