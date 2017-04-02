@@ -1,3 +1,30 @@
 <h1>Client: $client.getName()</h1>
 <p>Phone number: $client.getPhoneNumber()</p>
-<p>Stylist: <a href="/stylists/$stylist.getId()">$stylist.getName()</a></p>
+<p>Stylist: <a href="/stylists/$currentStylist.getId()">$currentStylist.getName()</a></p>
+
+<h2>Update client:</h2>
+
+<form action="/clients/$client.getId()" method="post">
+  <div class="form-group">
+      <label for="name">Client Name</label>
+      <input type="text" name="name" class="form-control" value="$client.getName()" required>
+  </div>
+  <div class="form-group">
+      <label for="phone_number">Phone Number</label>
+      <input type="text" name="phone_number" class="form-control" value="$client.getPhoneNumber()" required>
+  </div>
+  <select name="stylist_id">
+    #if($stylists)
+        #foreach ($stylist in $stylists)
+          #if ($stylist.equals($currentStylist))
+            <option selected="selected" value="$stylist.getId()">$stylist.getName()</option>
+          #else
+            <option value="$stylist.getId()">$stylist.getName()</option>
+          #end
+        #end
+    #else
+      <p>Please add stylists first!</p>
+    #end
+  </select>
+  <button type="submit" name="button" class="btn btn-warning">Update client</button>
+</form>

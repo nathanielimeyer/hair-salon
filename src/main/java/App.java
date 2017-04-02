@@ -29,16 +29,6 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/clients/:id", (request, response) -> {
-      Map<String, Object> model = new HashMap<String, Object>();
-      Client client = Client.findById(Integer.parseInt(request.params(":id")));
-      Stylist stylist = Stylist.findById(client.getStylistId());
-      model.put("client", client);
-      model.put("stylist", stylist);
-      model.put("template", "templates/client.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
-
     post("/stylists", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String name = request.queryParams("name");
@@ -49,6 +39,17 @@ public class App {
       Stylist newStylist = new Stylist(name, phone_number, weeknights, weekdays, weekends);
       newStylist.save();
       model.put("template", "templates/stylist-success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/clients/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("stylists", Stylist.all());
+      Client client = Client.findById(Integer.parseInt(request.params(":id")));
+      Stylist currentStylist = Stylist.findById(client.getStylistId());
+      model.put("client", client);
+      model.put("currentStylist", currentStylist);
+      model.put("template", "templates/client.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -70,6 +71,43 @@ public class App {
       int stylist_id = Integer.parseInt(request.params(":id"));
       Client newClient = new Client(name, phone_number, stylist_id);
       newClient.save();
+      model.put("template", "templates/stylist-clients-success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/stylists/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Stylist stylist = Stylist.findById(Integer.parseInt(request.params(":id")));
+      String name = request.queryParams("name");
+      stylist.setName(name);
+      String phone_number = request.queryParams("phone_number");
+      stylist.setPhoneNumber(phone_number);
+      boolean weeknights = false;
+      weeknights = Boolean.parseBoolean(request.queryParams("weeknights"));
+      stylist.setWeeknights(weeknights);
+      boolean weekdays = false;
+      weekdays = Boolean.parseBoolean(request.queryParams("weekdays"));
+      stylist.setWeekdays(weekdays);
+      boolean weekends = false;
+      weekends = Boolean.parseBoolean(request.queryParams("weekends"));
+      stylist.setWeekends(weekends);
+      stylist.update();
+      model.put("template", "templates/stylist-success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
+
+    post("/clients/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Client client = Client.findById(Integer.parseInt(request.params(":id")));
+      String name = request.queryParams("name");
+      client.setName(name);
+      String phone_number = request.queryParams("phone_number");
+      client.setPhoneNumber(phone_number);
+      int stylist_id = Integer.parseInt(request.queryParams("stylist_id"));
+      client.setStylistId(stylist_id);
+      client.update();
       model.put("template", "templates/stylist-clients-success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

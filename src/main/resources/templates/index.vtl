@@ -14,8 +14,8 @@
 
 <br>
 
-#if($unassignedClients)
-  <p>These clients have no stylist!</p>
+#if($unassignedClients.size() > 0)
+  <p>These clients have no stylist. Please set one.</p>
   <ul>
     #foreach ($unassignedClient in $unassignedClients)
       <li><a href="/clients/$unassignedClient.getId()">$unassignedClient.getName()</a></li>
@@ -39,15 +39,15 @@
   </div>
   <div class="form-group">
       <label for="weekdays">Available weekdays?</label>
-      <input type="checkbox" name="weekdays" class="form-control">
+      <input type="checkbox" name="weekdays" class="form-control" value="true">
   </div>
   <div class="form-group">
       <label for="weeknights">Available weeknights?</label>
-      <input type="checkbox" name="weeknights" class="form-control">
+      <input type="checkbox" name="weeknights" class="form-control" value="true">
   </div>
   <div class="form-group">
       <label for="weekends">Available weekends?</label>
-      <input type="checkbox" name="weekends" class="form-control">
+      <input type="checkbox" name="weekends" class="form-control" value="true">
   </div>
   <button type="submit" name="button" class="btn btn-warning">Submit new stylist</button>
 </form>
@@ -73,7 +73,7 @@
       #end
     </select>
     <button type="submit" name="button" class="btn btn-warning">Submit new client</button>
-  </form> -->
+  </form>
 
 
 <!--index.vtl-->
