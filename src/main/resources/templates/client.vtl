@@ -1,6 +1,12 @@
 <h1>Client: $client.getName()</h1>
 <p>Phone number: $client.getPhoneNumber()</p>
-<p>Stylist: <a href="/stylists/$currentStylist.getId()">$currentStylist.getName()</a></p>
+<p>Stylist:
+  #if ($currentStylist.getID().equals(1))
+    This client currently has no stylist. Please set one through the update form below.
+  #else
+    <a href="/stylists/$currentStylist.getId()">$currentStylist.getName()</a>
+  #end
+  </p>
 
 <h2>Update client:</h2>
 
@@ -27,4 +33,7 @@
     #end
   </select>
   <button type="submit" name="button" class="btn btn-warning">Update client</button>
+</form>
+<form action="/stylists/$client.getStylistId()/clients/$client.getId()/delete" method="post">
+  <button type="submit" class="btn btn-danger" id="delete-client">Delete Client</button>
 </form>

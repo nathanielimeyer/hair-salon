@@ -42,12 +42,16 @@
   <button type="submit" name="button" class="btn btn-warning">Update stylist</button>
 </form>
 
+<form action="/stylists/$stylist.getId()/delete" method="post">
+  <button type="submit" class="btn btn-danger" id="delete-stylist">Delete Stylist</button>
+</form>
+
 <h3>Clients:</h3>
 #if($clients)
   <p>Click on a client's name to see their details:</p>
   <ul>
     #foreach ($client in $clients)
-      <li><a href="/clients/$client.getId()">$client.getName()</a></li>
+      <li><a href="/stylists/$stylist.getId()/clients/$client.getId()">$client.getName()</a></li>
     #end
   </ul>
 #else

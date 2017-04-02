@@ -16,7 +16,6 @@ _User Stories_
 * As an employee, I need to be able to select a stylist, see their details, and see a list of all clients that belong to that stylist.
 * As an employee, I need to add new stylists to our system when they are hired.
 * As an employee, I need to be able to add new clients to a specific stylist.
-
 * As an employee, I need to be able to update a stylist's details.
 * As an employee, I need to be able to update a client's details.
 * As an employee, I need to be able to delete a stylist if they're no longer employed here. (What happens to the clients?)
@@ -32,7 +31,7 @@ _User Stories_
 
 ## Known Bugs
 
-No deletes have been implemented through the UI.
+Trying to suppress the link for "NO STYLIST'S" details page isn't working yet. 
 
 ## Support and contact details
 

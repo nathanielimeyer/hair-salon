@@ -18,7 +18,7 @@
   <p>These clients have no stylist. Please set one.</p>
   <ul>
     #foreach ($unassignedClient in $unassignedClients)
-      <li><a href="/clients/$unassignedClient.getId()">$unassignedClient.getName()</a></li>
+      <li><a href="/stylists/1/clients/$unassignedClient.getId()">$unassignedClient.getName()</a></li>
     #end
   </ul>
 #else
