@@ -24,14 +24,19 @@ _User Stories_
 ## Setup/Installation Requirements
 
 * _In any folder with git installed, run "git clone https://github.com/nathanielimeyer/hair-salon.git"._
-* _Load hair_salon.sql into your database._
+* _THIS PROJECT DEPENDS ON A DUMMY ROW IN THE STYLISTS TABLE. PLEASE IMPORT SAMPLE DATA BY DOING THE FOLLOWING:_
+* _Connect to psql and run: CREATE DATABASE hair_salon;_
+* _In terminal run "psql hair_salon < hair_salon.sql"_
 * _type "cd ./hair-salon" and enter_
 * _type "gradle run" and enter_
 * _In a browser load localhost:4567_
 
-## Known Bugs
+* _TEST CASES WERE ALSO WRITTEN WITH THE EXPECTATION OF A DUMMY ROW IN THE STYLISTS TABLE. THEY WILL FAIL UNLESS YOU DO THE FOLLOWING:_
+* _Connect to psql and run: CREATE DATABASE hair_salon_test;_
+* _In terminal run "psql hair_salon_test < hair_salon_test.sql"_
 
-Trying to suppress the link for "NO STYLIST'S" details page isn't working yet. 
+
+## Known Bugs
 
 ## Support and contact details
 

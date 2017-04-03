@@ -1,73 +1,82 @@
-<h1>Stylist: $stylist.getName()</h1>
-<p>Phone number: $stylist.getPhoneNumber()</p>
-<p>Works weekdays? $stylist.worksWeekdays()</p>
-<p>Works weeknights? $stylist.worksWeeknights()</p>
-<p>Works weekends? $stylist.worksWeekends()</p>
-
-<h2>Update stylist:</h2>
-
-<form action="/stylists/$stylist.getId()" method="post">
-  <div class="form-group">
-      <label for="name">Stylist Name</label>
-      <input type="text" name="name" class="form-control" value="$stylist.getName()" required>
+<div class="row">
+  <h1>Stylist: $stylist.getName()</h1>
+  <div class="col-sm-6">
+    <h3>$stylist.getName()'s Details:</h3>
+    <p>Phone number: $stylist.getPhoneNumber()</p>
+    <p>Works weekdays? $stylist.worksWeekdays()</p>
+    <p>Works weeknights? $stylist.worksWeeknights()</p>
+    <p>Works weekends? $stylist.worksWeekends()</p>
   </div>
-  <div class="form-group">
-      <label for="phone_number">Phone number</label>
-      <input type="text" name="phone_number" class="form-control" value="$stylist.getPhoneNumber()" required>
-  </div>
-  <div class="form-group">
-      <label for="weekdays">Available weekdays?</label>
-      #if ($stylist.worksWeekdays())
-        <input type="checkbox" name="weekdays" class="form-control" value="true" checked>
-      #else
-        <input type="checkbox" name="weekdays" class="form-control" value="true">
-      #end
-  </div>
-  <div class="form-group">
-      <label for="weeknights">Available weeknights?</label>
-      #if ($stylist.worksWeeknights())
-        <input type="checkbox" name="weeknights" class="form-control" value="true" checked>
-      #else
-        <input type="checkbox" name="weeknights" class="form-control" value="true">
-      #end
-  </div>
-  <div class="form-group">
-      <label for="weekends">Available weekends?</label>
-      #if ($stylist.worksWeekends())
-        <input type="checkbox" name="weekends" class="form-control" value="true" checked>
-      #else
-        <input type="checkbox" name="weekends" class="form-control" value="true">
-      #end
-  </div>
-  <button type="submit" name="button" class="btn btn-warning">Update stylist</button>
-</form>
-
-<form action="/stylists/$stylist.getId()/delete" method="post">
-  <button type="submit" class="btn btn-danger" id="delete-stylist">Delete Stylist</button>
-</form>
-
-<h3>Clients:</h3>
-#if($clients)
-  <p>Click on a client's name to see their details:</p>
-  <ul>
-    #foreach ($client in $clients)
-      <li><a href="/stylists/$stylist.getId()/clients/$client.getId()">$client.getName()</a></li>
+  <div class="col-sm-6">
+    <h3>$stylist.getName()'s Clients:</h3>
+    #if($clients)
+      <p>Click on a client's name to see their details:</p>
+      <ul>
+        #foreach ($client in $clients)
+          <li><a href="/stylists/$stylist.getId()/clients/$client.getId()">$client.getName()</a></li>
+        #end
+      </ul>
+    #else
+      <p>$stylist.getName() doesn't have any clients yet.</p>
     #end
-  </ul>
-#else
-  <p>$stylist.getName() doesn't have any clients yet.</p>
-#end
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Update stylist:</h2>
 
-<h3>Add new client:</h3>
+    <form action="/stylists/$stylist.getId()" method="post">
+      <div class="form-group">
+          <label for="name">Stylist Name</label>
+          <input type="text" name="name" class="form-control" value="$stylist.getName()" required>
+      </div>
+      <div class="form-group">
+          <label for="phone_number">Phone number</label>
+          <input type="text" name="phone_number" class="form-control" value="$stylist.getPhoneNumber()" required>
+      </div>
+      <div class="form-group">
+          <label for="weekdays">Available weekdays?</label>
+          #if ($stylist.worksWeekdays())
+            <input type="checkbox" name="weekdays" class="form-control" value="true" checked>
+          #else
+            <input type="checkbox" name="weekdays" class="form-control" value="true">
+          #end
+      </div>
+      <div class="form-group">
+          <label for="weeknights">Available weeknights?</label>
+          #if ($stylist.worksWeeknights())
+            <input type="checkbox" name="weeknights" class="form-control" value="true" checked>
+          #else
+            <input type="checkbox" name="weeknights" class="form-control" value="true">
+          #end
+      </div>
+      <div class="form-group">
+          <label for="weekends">Available weekends?</label>
+          #if ($stylist.worksWeekends())
+            <input type="checkbox" name="weekends" class="form-control" value="true" checked>
+          #else
+            <input type="checkbox" name="weekends" class="form-control" value="true">
+          #end
+      </div>
+      <button type="submit" name="button" class="btn btn-warning">Update stylist</button>
+    </form>
 
-  <form action="/stylists/$stylist.getId()/clients" method="post">
-    <div class="form-group">
-        <label for="name">Client Name</label>
-        <input type="text" name="name" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="phone_number">Phone Number</label>
-        <input type="text" name="phone_number" class="form-control" required>
-    </div>
-    <button type="submit" name="button" class="btn btn-warning">Submit new client</button>
-  </form>
+    <form action="/stylists/$stylist.getId()/delete" method="post">
+      <button type="submit" class="btn btn-danger" id="delete-stylist">Delete Stylist</button>
+    </form>
+  </div>
+  <div class="col-sm-6">
+    <h3>Add new client:</h3>
+      <form action="/stylists/$stylist.getId()/clients" method="post">
+        <div class="form-group">
+            <label for="name">Client Name</label>
+            <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="phone_number">Phone Number</label>
+            <input type="text" name="phone_number" class="form-control" required>
+        </div>
+        <button type="submit" name="button" class="btn btn-warning">Submit new client</button>
+      </form>
+  </div>
+</div>

@@ -1,79 +1,83 @@
 <!--index.vtl-->
-<h1>Welcome to Hair Salon</h1>
-
-#if($stylists)
-  <p>Click on a stylist's name to see their details:</p>
-  <ul>
-    #foreach ($stylist in $stylists)
-      <li><a href="/stylists/$stylist.getId()">$stylist.getName()</a></li>
+<div class="row">
+  <h1>Hello, Manager, and welcome back to Soup-or-Cuts.</h1>
+  <div class="col-sm-6">
+    <h2>Current Stylists:</h2>
+    #if($stylists)
+      <p>Click on a stylist's name to see their details:</p>
+      <ul>
+        #foreach ($stylist in $stylists)
+          <li><a href="/stylists/$stylist.getId()">$stylist.getName()</a></li>
+        #end
+      </ul>
+    #else
+      <p>There are no stylists yet!</p>
     #end
-  </ul>
-#else
-  <p>There are no stylists yet!</p>
-#end
-
-<br>
-
-#if($unassignedClients.size() > 0)
-  <p>These clients have no stylist. Please set one.</p>
-  <ul>
-    #foreach ($unassignedClient in $unassignedClients)
-      <li><a href="/stylists/1/clients/$unassignedClient.getId()">$unassignedClient.getName()</a></li>
+  </div>
+  <div class="col-sm-6">
+    <h2>Unassigned Clients:</h2>
+    #if($unassignedClients.size() > 0)
+      <p>These clients have no stylist. Please set one.</p>
+      <ul>
+        #foreach ($unassignedClient in $unassignedClients)
+          <li><a href="/stylists/1/clients/$unassignedClient.getId()">$unassignedClient.getName()</a></li>
+        #end
+      </ul>
+    #else
+      <p>Hooray! All clients have stylists!</p>
     #end
-  </ul>
-#else
-  <p>Hooray! All clients have stylists!</p>
-#end
-
-
-<h2>Add a New Stylist:</h2>
-
-<form action="/stylists" method="post">
-  <div class="form-group">
-      <label for="name">Stylist Name</label>
-      <input type="text" name="name" class="form-control" required>
   </div>
-  <div class="form-group">
-      <label for="phone_number">Phone number</label>
-      <input type="text" name="phone_number" class="form-control" required>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Add a New Stylist:</h2>
+    <form action="/stylists" method="post">
+      <div class="form-group">
+        <label for="name">Stylist Name</label>
+        <input type="text" name="name" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Phone number</label>
+        <input type="text" name="phone_number" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="weekdays">Available weekdays?</label>
+        <input type="checkbox" name="weekdays" class="form-control" value="true">
+      </div>
+      <div class="form-group">
+        <label for="weeknights">Available weeknights?</label>
+        <input type="checkbox" name="weeknights" class="form-control" value="true">
+      </div>
+      <div class="form-group">
+        <label for="weekends">Available weekends?</label>
+        <input type="checkbox" name="weekends" class="form-control" value="true">
+      </div>
+      <button type="submit" name="button" class="btn btn-warning">Submit new stylist</button>
+    </form>
   </div>
-  <div class="form-group">
-      <label for="weekdays">Available weekdays?</label>
-      <input type="checkbox" name="weekdays" class="form-control" value="true">
-  </div>
-  <div class="form-group">
-      <label for="weeknights">Available weeknights?</label>
-      <input type="checkbox" name="weeknights" class="form-control" value="true">
-  </div>
-  <div class="form-group">
-      <label for="weekends">Available weekends?</label>
-      <input type="checkbox" name="weekends" class="form-control" value="true">
-  </div>
-  <button type="submit" name="button" class="btn btn-warning">Submit new stylist</button>
-</form>
-
-<h2>New client:</h2>
-
-  <form action="/clients" method="post">
-    <div class="form-group">
+  <div class="col-sm-6">
+    <h2>New client:</h2>
+    <form action="/clients" method="post">
+      <div class="form-group">
         <label for="name">Client Name</label>
         <input type="text" name="name" class="form-control" required>
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <label for="phone_number">Phone Number</label>
         <input type="text" name="phone_number" class="form-control" required>
-    </div>
-    <select name="stylist_id">
-      #if($stylists)
+      </div>
+      <label for="stylist_id">Stylist:</label>
+      <select name="stylist_id">
+        #if($stylists)
           #foreach ($stylist in $stylists)
-          <option value="$stylist.getId()">$stylist.getName()</option>
+            <option value="$stylist.getId()">$stylist.getName()</option>
           #end
-      #else
-        <p>Please add stylists first!</p>
-      #end
-    </select>
-    <button type="submit" name="button" class="btn btn-warning">Submit new client</button>
-  </form>
-
-
-<!--index.vtl-->
+        #else
+          <p>Please add stylists first!</p>
+        #end
+      </select>
+      <br>
+      <button type="submit" name="button" class="btn btn-warning">Submit new client</button>
+    </form>
+  </div>
+</div>

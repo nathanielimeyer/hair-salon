@@ -1,7 +1,7 @@
 <h1>Client: $client.getName()</h1>
 <p>Phone number: $client.getPhoneNumber()</p>
 <p>Stylist:
-  #if ($currentStylist.getID().equals(1))
+  #if ($currentStylist.getId() == 1)
     This client currently has no stylist. Please set one through the update form below.
   #else
     <a href="/stylists/$currentStylist.getId()">$currentStylist.getName()</a>
@@ -19,6 +19,7 @@
       <label for="phone_number">Phone Number</label>
       <input type="text" name="phone_number" class="form-control" value="$client.getPhoneNumber()" required>
   </div>
+  <label for="stylist_id">Stylist:</label>
   <select name="stylist_id">
     #if($stylists)
         #foreach ($stylist in $stylists)
@@ -32,6 +33,7 @@
       <p>Please add stylists first!</p>
     #end
   </select>
+  <br>
   <button type="submit" name="button" class="btn btn-warning">Update client</button>
 </form>
 <form action="/stylists/$client.getStylistId()/clients/$client.getId()/delete" method="post">
